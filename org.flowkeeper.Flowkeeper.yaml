@@ -15,9 +15,9 @@ finish-args:
   - --socket=pulseaudio
   - --device=dri
   - --talk-name=org.kde.StatusNotifierWatcher
-  - --env=PYTHONPATH=${FLATPAK_DEST}/flowkeeper/
+  - --env=PYTHONPATH=/app/flowkeeper/
 cleanup-commands:
-  - ${FLATPAK_DEST}/cleanup-BaseApp.sh
+  - /app/cleanup-BaseApp.sh
 cleanup:
   - '*.a'
   - /include
@@ -115,5 +115,5 @@ modules:
 
       - type: script
         commands:
-          - python ${FLATPAK_DEST}/flowkeeper/fk/desktop/desktop.py "$@"
+          - python /app/flowkeeper/fk/desktop/desktop.py "$@"
         dest-filename: run.sh

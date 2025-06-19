@@ -90,16 +90,16 @@ modules:
   - name: flowkeeper
     buildsystem: simple
     build-commands:
-      - install -Dm755 run.sh /app/bin/run.sh
-
       - python -m compileall .
 
-      - desktop-file-edit --remove-key="Exec" --remove-key="Version" flowkeeper/installer/flowkeeper.desktop
-      - desktop-file-edit --set-key="Exec" --set-value="run.sh" flowkeeper/installer/flowkeeper.desktop
-      - install -Dm644 flowkeeper/installer/flowkeeper.desktop ${FLATPAK_DEST}/share/applications/flowkeeper.desktop
-      - install -Dm644 flowkeeper/installer/org.flowkeeper.Flowkeeper.metainfo.xml
-        /app/share/metainfo/org.flowkeeper.Flowkeeper.metainfo.xml
-      - install -Dm644 flowkeeper/res/flowkeeper.png /app/share/icons/hicolor/512x512/apps/flowkeeper.png
+      - desktop-file-edit --remove-key="Exec" --remove-key="Version" --remove-key="Icon" "flowkeeper/scripts/linux/common/flowkeeper.desktop"
+      - desktop-file-edit --set-key="Exec" --set-value="run.sh" "flowkeeper/scripts/linux/common/flowkeeper.desktop"
+      - desktop-file-edit --set-key="Icon" --set-value="/usr/share/icons/hicolor/512x512/flowkeeper/flowkeeper" "flowkeeper/scripts/linux/common/flowkeeper.desktop"
+
+      - install -Dm644 "flowkeeper/scripts/linux/common/flowkeeper.desktop" ${FLATPAK_DEST}/share/applications/flowkeeper.desktop
+      - install -Dm644 flowkeeper/scripts/linux/common/org.flowkeeper.Flowkeeper.metainfo.xml ${FLATPAK_DEST}/share/metainfo/org.flowkeeper.Flowkeeper.metainfo.xml
+      - install -Dm644 flowkeeper/flowkeeper-512x512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/flowkeeper.png
+      - install -Dm755 run.sh ${FLATPAK_DEST}/bin/run.sh
 
       - cd flowkeeper/res; /lib/libexec/rcc -g python --project -o "resources.qrc"
       - cd flowkeeper/res; /lib/libexec/rcc -g python "resources.qrc" -o "../src/fk/desktop/resources.py"
@@ -109,9 +109,14 @@ modules:
 
     sources:
       - type: archive
-        url: https://github.com/flowkeeper-org/fk-desktop/archive/refs/tags/v0.10.0.tar.gz
+        url: https://github.com/flowkeeper-org/fk-desktop/archive/refs/tags/v1.0.0.tar.gz
         dest: flowkeeper
-        sha256: ab7f0e88ca34462f54a092d47b111df292211c5d18e993973b3ed3c75471dc3b
+        sha256: 46e4b5733bb11a336d5297158898fe41dfcbb0caf3f28e13fe4f3f697d62941b
+
+      - type: file
+        url: https://github.com/flowkeeper-org/fk-desktop/releases/download/v1.0.0/flowkeeper-512x512.png
+        dest: flowkeeper
+        sha256: a8bb673ac83af166a5117b83d8c5e18ed64207e7c5ffbe031df13bf683720ec8
 
       - type: script
         commands:

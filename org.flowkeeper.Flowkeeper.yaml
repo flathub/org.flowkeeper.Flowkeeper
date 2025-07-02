@@ -50,18 +50,18 @@ modules:
         cffi
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/b2/d5/da47df7004cb17e4955df6a43d14b3b4ae77737dff8bf7f8f333196717bf/cffi-1.17.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
-        sha256: b62ce867176a75d03a665bad002af8e6d54644fad99a3c70905c543130e39d93
+        url: https://files.pythonhosted.org/packages/fc/97/c783634659c2920c3fc70419e3af40972dbaf758daa229a7d6ea6135c90d/cffi-1.17.1.tar.gz
+        sha256: 1c39c6016c32bc48dd54561950ebd6836e1670f2ae46128f67cf49e789c52824
         only-arches:
-        - x86_64
+          - x86_64
         x-checker-data:
           type: pypi
           name: cffi
       - type: file
-        url: https://files.pythonhosted.org/packages/1a/df/f8d151540d8c200eb1c6fba8cd0dfd40904f1b0682ea705c36e6c2e97ab3/cffi-1.17.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
-        sha256: da95af8214998d77a98cc14e3a3bd00aa191526343078b530ceb0bd710fb48a5
+        url: https://files.pythonhosted.org/packages/fc/97/c783634659c2920c3fc70419e3af40972dbaf758daa229a7d6ea6135c90d/cffi-1.17.1.tar.gz
+        sha256: 1c39c6016c32bc48dd54561950ebd6836e1670f2ae46128f67cf49e789c52824
         only-arches:
-        - aarch64
+          - aarch64
         x-checker-data:
           type: pypi
           name: cffi
@@ -73,18 +73,18 @@ modules:
         cryptography
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/ef/82/72403624f197af0db6bac4e58153bc9ac0e6020e57234115db9596eee85d/cryptography-44.0.0-cp39-abi3-manylinux_2_28_x86_64.whl
-        sha256: f53c2c87e0fb4b0c00fa9571082a057e37690a8f12233306161c8f4b819960b7
+        url: https://files.pythonhosted.org/packages/95/1e/49527ac611af559665f71cbb8f92b332b5ec9c6fbc4e88b0f8e92f5e85df/cryptography-45.0.5.tar.gz
+        sha256: 72e76caa004ab63accdf26023fccd1d087f6d90ec6048ff33ad0445abf7f605a
         only-arches:
-        - x86_64
+          - x86_64
         x-checker-data:
           type: pypi
           name: cryptography
       - type: file
-        url: https://files.pythonhosted.org/packages/d0/c7/c656eb08fd22255d21bc3129625ed9cd5ee305f33752ef2278711b3fa98b/cryptography-44.0.0-cp39-abi3-manylinux_2_28_aarch64.whl
-        sha256: c5eb858beed7835e5ad1faba59e865109f3e52b3783b9ac21e7e47dc5554e289
+        url: https://files.pythonhosted.org/packages/95/1e/49527ac611af559665f71cbb8f92b332b5ec9c6fbc4e88b0f8e92f5e85df/cryptography-45.0.5.tar.gz
+        sha256: 72e76caa004ab63accdf26023fccd1d087f6d90ec6048ff33ad0445abf7f605a
         only-arches:
-        - aarch64
+          - aarch64
         x-checker-data:
           type: pypi
           name: cryptography
@@ -96,12 +96,15 @@ modules:
     build-commands:
       - python -m compileall .
 
-      - desktop-file-edit --remove-key="Exec" --remove-key="Version" --remove-key="Icon" "flowkeeper/scripts/linux/common/flowkeeper.desktop"
+      - desktop-file-edit --remove-key="Exec" --remove-key="Version" --remove-key="Icon"
+        "flowkeeper/scripts/linux/common/flowkeeper.desktop"
       - desktop-file-edit --set-key="Exec" --set-value="run.sh" "flowkeeper/scripts/linux/common/flowkeeper.desktop"
-      - desktop-file-edit --set-key="Icon" --set-value="/usr/share/icons/hicolor/512x512/flowkeeper/flowkeeper" "flowkeeper/scripts/linux/common/flowkeeper.desktop"
+      - desktop-file-edit --set-key="Icon" --set-value="/usr/share/icons/hicolor/512x512/flowkeeper/flowkeeper"
+        "flowkeeper/scripts/linux/common/flowkeeper.desktop"
 
       - install -Dm644 "flowkeeper/scripts/linux/common/flowkeeper.desktop" ${FLATPAK_DEST}/share/applications/flowkeeper.desktop
-      - install -Dm644 flowkeeper/scripts/linux/common/org.flowkeeper.Flowkeeper.metainfo.xml ${FLATPAK_DEST}/share/metainfo/org.flowkeeper.Flowkeeper.metainfo.xml
+      - install -Dm644 flowkeeper/scripts/linux/common/org.flowkeeper.Flowkeeper.metainfo.xml
+        ${FLATPAK_DEST}/share/metainfo/org.flowkeeper.Flowkeeper.metainfo.xml
       - install -Dm644 flowkeeper/flowkeeper-512x512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/flowkeeper.png
       - install -Dm755 run.sh ${FLATPAK_DEST}/bin/run.sh
 

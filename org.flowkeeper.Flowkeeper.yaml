@@ -9,8 +9,6 @@ build-options:
     - BASEAPP_REMOVE_WEBENGINE=1
     - BASEAPP_DISABLE_NUMPY=1
 command: run.sh
-rename-desktop-file: flowkeeper.desktop
-rename-icon: flowkeeper
 finish-args:
   - --socket=fallback-x11
   - --socket=wayland
@@ -96,13 +94,13 @@ modules:
     build-commands:
       - python -m compileall .
 
-      - desktop-file-edit --remove-key="Exec" --remove-key="Version" --remove-key="Icon" "flowkeeper/scripts/linux/common/flowkeeper.desktop"
-      - desktop-file-edit --set-key="Exec" --set-value="run.sh" "flowkeeper/scripts/linux/common/flowkeeper.desktop"
-      - desktop-file-edit --set-key="Icon" --set-value="/usr/share/icons/hicolor/512x512/flowkeeper/flowkeeper" "flowkeeper/scripts/linux/common/flowkeeper.desktop"
+      - desktop-file-edit --remove-key="Exec" --remove-key="Version" "flowkeeper/scripts/linux/common/org.flowkeeper.Flowkeeper.desktop"
+      - desktop-file-edit --set-key="Exec" --set-value="run.sh" "flowkeeper/scripts/linux/common/org.flowkeeper.Flowkeeper.desktop"
 
-      - install -Dm644 "flowkeeper/scripts/linux/common/flowkeeper.desktop" ${FLATPAK_DEST}/share/applications/flowkeeper.desktop
-      - install -Dm644 flowkeeper/scripts/linux/common/org.flowkeeper.Flowkeeper.metainfo.xml ${FLATPAK_DEST}/share/metainfo/org.flowkeeper.Flowkeeper.metainfo.xml
-      - install -Dm644 flowkeeper/flowkeeper-512x512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/flowkeeper.png
+      - install -Dm644 "flowkeeper/scripts/linux/common/org.flowkeeper.Flowkeeper.desktop" "${FLATPAK_DEST}/share/applications/org.flowkeeper.Flowkeeper.desktop"
+      - install -Dm644 "flowkeeper/scripts/linux/common/org.flowkeeper.Flowkeeper.metainfo.xml" "${FLATPAK_DEST}/share/metainfo/org.flowkeeper.Flowkeeper.metainfo.xml"
+      - install -Dm644 "flowkeeper/flowkeeper-512x512.png" "${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/org.flowkeeper.Flowkeeper.png"
+      - install -Dm644 "flowkeeper/flowkeeper-48x48.png" "${FLATPAK_DEST}/share/icons/hicolor/48x48/apps/org.flowkeeper.Flowkeeper.png"
       - install -Dm755 run.sh ${FLATPAK_DEST}/bin/run.sh
 
       - cd flowkeeper/res; /lib/libexec/rcc -g python --project -o "resources.qrc"
@@ -113,16 +111,16 @@ modules:
 
     sources:
       - type: archive
-        url: https://github.com/flowkeeper-org/fk-desktop/archive/refs/tags/v1.0.0.tar.gz
+        url: https://github.com/flowkeeper-org/fk-desktop/archive/refs/tags/v1.0.1.tar.gz
         dest: flowkeeper
-        sha256: 46e4b5733bb11a336d5297158898fe41dfcbb0caf3f28e13fe4f3f697d62941b
-
-      - type: file
-        url: https://github.com/flowkeeper-org/fk-desktop/releases/download/v1.0.0/flowkeeper-512x512.png
-        dest: flowkeeper
-        sha256: a8bb673ac83af166a5117b83d8c5e18ed64207e7c5ffbe031df13bf683720ec8
+        sha256: 7e5f16f82e24922e75bd2378133c8651ea2133cc925b89f770a0abfe0aee0cfe
 
       - type: script
         commands:
           - python /app/flowkeeper/fk/desktop/desktop.py "$@"
         dest-filename: run.sh
+
+      - type: file
+        url: https://github.com/flowkeeper-org/fk-desktop/releases/download/v1.0.1/flowkeeper-512x512.png
+        dest: flowkeeper
+        sha256: a8bb673ac83af166a5117b83d8c5e18ed64207e7c5ffbe031df13bf683720ec8

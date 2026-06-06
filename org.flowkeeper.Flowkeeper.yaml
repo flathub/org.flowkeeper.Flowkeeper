@@ -1,9 +1,9 @@
 app-id: org.flowkeeper.Flowkeeper
 runtime: org.kde.Platform
-runtime-version: '6.9'
+runtime-version: '6.10'
 sdk: org.kde.Sdk
 base: io.qt.PySide.BaseApp
-base-version: '6.9'
+base-version: '6.10'
 build-options:
   env:
     - BASEAPP_REMOVE_WEBENGINE=1
@@ -20,73 +20,7 @@ finish-args:
   - --env=PYTHONPATH=/app/flowkeeper/
 cleanup-commands:
   - /app/cleanup-BaseApp.sh
-cleanup:
-  - '*.a'
-  - /include
-  - /lib/cmake
-  - /lib/pkgconfig
-  - /share/man
 modules:
-
-  - name: python3-pycparser
-    buildsystem: simple
-    build-commands:
-      - pip3 install --no-index --find-links=file://${PWD} --prefix=${FLATPAK_DEST}
-        pycparser
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/13/a3/a812df4e2dd5696d1f351d58b8fe16a405b234ad2886a0dab9183fb78109/pycparser-2.22-py3-none-any.whl
-        sha256: c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc
-        x-checker-data:
-          type: pypi
-          name: pycparser
-
-  - name: python3-cffi
-    buildsystem: simple
-    build-commands:
-      - pip3 install --no-index --find-links=file://${PWD} --prefix=${FLATPAK_DEST}
-        cffi
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/b2/d5/da47df7004cb17e4955df6a43d14b3b4ae77737dff8bf7f8f333196717bf/cffi-1.17.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
-        sha256: b62ce867176a75d03a665bad002af8e6d54644fad99a3c70905c543130e39d93
-        only-arches:
-        - x86_64
-        x-checker-data:
-          type: pypi
-          name: cffi
-      - type: file
-        url: https://files.pythonhosted.org/packages/1a/df/f8d151540d8c200eb1c6fba8cd0dfd40904f1b0682ea705c36e6c2e97ab3/cffi-1.17.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
-        sha256: da95af8214998d77a98cc14e3a3bd00aa191526343078b530ceb0bd710fb48a5
-        only-arches:
-        - aarch64
-        x-checker-data:
-          type: pypi
-          name: cffi
-
-  - name: python3-cryptography
-    buildsystem: simple
-    build-commands:
-      - pip3 install --no-index --find-links=file://${PWD} --prefix=${FLATPAK_DEST}
-        cryptography
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/ef/82/72403624f197af0db6bac4e58153bc9ac0e6020e57234115db9596eee85d/cryptography-44.0.0-cp39-abi3-manylinux_2_28_x86_64.whl
-        sha256: f53c2c87e0fb4b0c00fa9571082a057e37690a8f12233306161c8f4b819960b7
-        only-arches:
-        - x86_64
-        x-checker-data:
-          type: pypi
-          name: cryptography
-      - type: file
-        url: https://files.pythonhosted.org/packages/d0/c7/c656eb08fd22255d21bc3129625ed9cd5ee305f33752ef2278711b3fa98b/cryptography-44.0.0-cp39-abi3-manylinux_2_28_aarch64.whl
-        sha256: c5eb858beed7835e5ad1faba59e865109f3e52b3783b9ac21e7e47dc5554e289
-        only-arches:
-        - aarch64
-        x-checker-data:
-          type: pypi
-          name: cryptography
-
   - python3-modules.yaml
 
   - name: flowkeeper
@@ -94,14 +28,13 @@ modules:
     build-commands:
       - python -m compileall .
 
-      - desktop-file-edit --remove-key="Exec" --remove-key="Version" "flowkeeper/scripts/linux/common/org.flowkeeper.Flowkeeper.desktop"
-      - desktop-file-edit --set-key="Exec" --set-value="run.sh" "flowkeeper/scripts/linux/common/org.flowkeeper.Flowkeeper.desktop"
+      - desktop-file-edit --remove-key=Exec --remove-key=Version flowkeeper/scripts/linux/common/${FLATPAK_ID}.desktop
+      - desktop-file-edit --set-key=Exec --set-value="run.sh" flowkeeper/scripts/linux/common/${FLATPAK_ID}.desktop
 
-      - install -Dm644 "flowkeeper/scripts/linux/common/org.flowkeeper.Flowkeeper.desktop" "${FLATPAK_DEST}/share/applications/org.flowkeeper.Flowkeeper.desktop"
-      - install -Dm644 "flowkeeper/scripts/linux/common/org.flowkeeper.Flowkeeper.metainfo.xml" "${FLATPAK_DEST}/share/metainfo/org.flowkeeper.Flowkeeper.metainfo.xml"
-      - install -Dm644 "flowkeeper/flowkeeper-512x512.png" "${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/org.flowkeeper.Flowkeeper.png"
-      - install -Dm644 "flowkeeper/flowkeeper-48x48.png" "${FLATPAK_DEST}/share/icons/hicolor/48x48/apps/org.flowkeeper.Flowkeeper.png"
-      - install -Dm755 run.sh ${FLATPAK_DEST}/bin/run.sh
+      - install -Dm644 flowkeeper/scripts/linux/common/${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
+      - install -Dm644 flowkeeper/scripts/linux/common/${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
+      - install -Dm644 flowkeeper/flowkeeper-512x512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      - install -Dm755 run.sh -t ${FLATPAK_DEST}/bin/
 
       - cd flowkeeper/res; /lib/libexec/rcc -g python --project -o "resources.qrc"
       - cd flowkeeper/res; /lib/libexec/rcc -g python "resources.qrc" -o "../src/fk/desktop/resources.py"
@@ -116,6 +49,6 @@ modules:
         sha256: 86cf3f81a1772fb33e123b157361a002d2bff831430af5be97becb675fa2d987
 
       - type: script
+        dest-filename: run.sh
         commands:
           - python /app/flowkeeper/fk/desktop/desktop.py "$@"
-        dest-filename: run.sh

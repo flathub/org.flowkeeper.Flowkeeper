@@ -34,8 +34,7 @@ modules:
       - install -Dm644 flowkeeper/scripts/linux/common/${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
       - install -Dm644 flowkeeper/scripts/linux/common/${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
 
-      - magick convert -resize 512 flowkeeper/res/flowkeeper.png flowkeeper/flowkeeper-512x512.png
-      - install -Dm644 flowkeeper/flowkeeper-512x512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+      - install -Dm644 ./flowkeeper-512x512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
       - install -Dm755 run.sh -t ${FLATPAK_DEST}/bin/
 
       - cd flowkeeper/res; /lib/libexec/rcc -g python --project -o "resources.qrc"
@@ -54,3 +53,6 @@ modules:
         dest-filename: run.sh
         commands:
           - python /app/flowkeeper/fk/desktop/desktop.py "$@"
+
+      - type: file
+        path: flowkeeper-512x512.png

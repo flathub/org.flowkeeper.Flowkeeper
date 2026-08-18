@@ -33,6 +33,8 @@ modules:
 
       - install -Dm644 flowkeeper/scripts/linux/common/${FLATPAK_ID}.desktop -t ${FLATPAK_DEST}/share/applications/
       - install -Dm644 flowkeeper/scripts/linux/common/${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
+
+      - magick convert -resize 512 flowkeeper/res/flowkeeper.png flowkeeper/flowkeeper-512x512.png
       - install -Dm644 flowkeeper/flowkeeper-512x512.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
       - install -Dm755 run.sh -t ${FLATPAK_DEST}/bin/
 
@@ -44,9 +46,9 @@ modules:
 
     sources:
       - type: archive
-        url: https://github.com/flowkeeper-org/fk-desktop/archive/refs/tags/v1.0.2.tar.gz
+        url: https://github.com/flowkeeper-org/fk-desktop/archive/refs/tags/v1.1.0.tar.gz
         dest: flowkeeper
-        sha256: 86cf3f81a1772fb33e123b157361a002d2bff831430af5be97becb675fa2d987
+        sha256: 9b4e1096b9827fef7c8809a511c567bf54ca7a9fbe6586dbf3ea53057526f1b0
 
       - type: script
         dest-filename: run.sh

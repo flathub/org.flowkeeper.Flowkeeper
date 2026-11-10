@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+    <id>org.flowkeeper.Flowkeeper</id>
+
+    <name>Flowkeeper</name>
+
+    <summary>Pomodoro timer for power users</summary>
+
+    <url type="homepage">https://flowkeeper.org</url>
+
+    <metadata_license>MIT</metadata_license>
+
+    <project_license>GPL-3.0-only</project_license>
+
+    <description>
+        <p>
+            Flowkeeper is a Pomodoro timer, which stays as close as possible to Pomodoro Technique description found in
+            the original book by Francesco Cirillo. Featuring classic UI paradigm (desktop-first, no Electron), keyboard
+            shortcuts and advanced settings, Flowkeeper is optimized for power users.
+        </p>
+    </description>
+
+    <launchable type="desktop-id">org.flowkeeper.Flowkeeper.desktop</launchable>
+
+    <screenshots>
+        <screenshot type="default">
+            <image>https://flowkeeper.org/images/releases/v1.1.0/Linux/fulls/18-main-light-window-border.png</image>
+        </screenshot>
+        <screenshot>
+            <image>https://flowkeeper.org/images/releases/v1.1.0/Linux/fulls/02-pomodoro-full.png</image>
+        </screenshot>
+        <screenshot>
+            <image>https://flowkeeper.org/images/releases/v1.1.0/Linux/fulls/28-fullscreen-break-window.png</image>
+        </screenshot>
+        <screenshot>
+            <image>https://flowkeeper.org/images/releases/v1.1.0/Linux/fulls/14-stats-month-window-border.png</image>
+        </screenshot>
+        <screenshot>
+            <image>https://flowkeeper.org/images/releases/v1.1.0/Linux/fulls/16-work-summary-window-border.png</image>
+        </screenshot>
+        <screenshot>
+            <image>https://flowkeeper.org/images/releases/v1.1.0/Linux/fulls/30-categories-window-border.png</image>
+        </screenshot>
+    </screenshots>
+
+    <branding>
+      <color type="primary" scheme_preference="light">#f6f5f4</color>
+      <color type="primary" scheme_preference="dark">#241f31</color>
+    </branding>
+
+    <provides>
+        <binary>flowkeeper</binary>
+    </provides>
+
+    <releases>
+        <release version="1.1.0" date="2026-09-14">
+            <description>
+                <p>This release has a few noticeable features, and a bunch of small improvements under the hood. Major new features include fullscreen breaks and tasks categorization. See https://flowkeeper.org/v1.1.0/ for details.</p>
+            </description>
+        </release>
+    </releases>
+
+    <developer id="org.flowkeeper">
+        <name>Flowkeeper Team</name>
+    </developer>
+
+    <content_rating type="oars-1.0" />
+</component>

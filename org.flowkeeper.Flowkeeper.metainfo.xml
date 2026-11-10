@@ -55,42 +55,7 @@
     <releases>
         <release version="1.1.0" date="2026-09-14">
             <description>
-
-                <p>New features:
-                    <ul>
-                        <li>Full-screen rest notifications (#67)</li>
-                        <li>Knocking sound to remind about approaching break (#67)</li>
-                        <li>Configurable (F5) task categories / groups to help prioritize your work (#177)</li>
-                        <li>Presets for some of the popular productivity methods: 1-2-3 Rule, ABCDE Method, Eisenhower Matrix, and more</li>
-                        <li>Mute button in the focus mode (#151)</li>
-                        <li>You can now undo task completion by pressing Ctrl+P again (#55, #198)</li>
-                        <li>Main window is activated when another instance is launched (#89)</li>
-                        <li>New themes, including Very Dark, Very Light and Reddit Light</li>
-                        <li>New KDE-friendly "FK" logo and tray icon</li>
-                    </ul>
-                </p>
-
-                <p>Technical improvements:
-                    <ul>
-                        <li>Upgraded to Qt 6.11</li>
-                        <li>Fixed a bunch of code quality issues reported by SonarQube</li>
-                        <li>Switched to Nuitka 4.x to compile the binaries</li>
-                        <li>RPM builds and Fedora repos in OBS (#127)</li>
-                        <li>Converted all audio resources to m4a format</li>
-                        <li>Metadata on workitems and backlogs (#112)</li>
-                        <li>Snapcraft.io manifest</li>
-                        <li>New build configurations: Ubuntu 26.04, macOS 26 and Windows 11 ARM</li>
-                        <li>"About > System info" tab to help reporting issues</li>
-                    </ul>
-                </p>
-
-                <p>Bug fixes:
-                    <ul>
-                        <li>An issue when launching Flowkeeper during a long break</li>
-                        <li>Two bugs with import/export handling of reordering</li>
-                        <li>Drag-and-drop in Wayland (#223)</li>
-                    </ul>
-                </p>
+                <p>This release has a few noticeable features, and a bunch of small improvements under the hood. Major new features include fullscreen breaks and tasks categorization. See https://flowkeeper.org/v1.1.0/ for details.</p>
             </description>
         </release>
     </releases>
